@@ -26,7 +26,7 @@ namespace CronReporting.Controllers
 
         // POST api/<controller>
         [Route("api/cronos")]
-        public void Post([FromBody]Database database)
+        public HttpResponseMessage Post([FromBody]Database database)
         {
             var cronosRepository = new CronosRepository();
             database.tables.branch.ForEach(branch => cronosRepository.SaveBranch(branch));
@@ -44,13 +44,15 @@ namespace CronReporting.Controllers
             database.tables.subscriber_info.ForEach(subscriber_info => cronosRepository.SaveSubscriberInfo(subscriber_info));
             database.tables.user_account.ForEach(user_account => cronosRepository.SaveUserAccount(user_account));
             var nullDate = new DateTime();
-            cronosRepository.SaveClients(new Clients
+            var pass = cronosRepository.SaveClients(new Clients
             {
                 client_id = database.client_id,
                 client = database.client,
                 last_sync_date = database.last_sync_date == nullDate ? DateTime.Now : database.last_sync_date,
                 sync_date = database.sync_date
             });
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
 
