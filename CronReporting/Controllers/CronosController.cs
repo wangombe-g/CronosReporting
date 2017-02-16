@@ -29,21 +29,21 @@ namespace CronReporting.Controllers
         public HttpResponseMessage Post([FromBody]Database database)
         {
             var cronosRepository = new CronosRepository();
-            database.tables.branch.ForEach(branch => cronosRepository.SaveBranch(branch));
-            database.tables.cart.ForEach(cart => cronosRepository.SaveCart(cart));
-            database.tables.category.ForEach(category => cronosRepository.SaveCategory(category));
-            database.tables.changing_info.ForEach(changing_info => cronosRepository.SaveChangingInfo(changing_info));
-            database.tables.invoiced_products.ForEach(invoiced_products => cronosRepository.SaveInvoicedProduct(invoiced_products));
-            database.tables.invoice.ForEach(invoice => cronosRepository.SaveInvoice(invoice));
-            database.tables.personal_info.ForEach(personal_info => cronosRepository.SavePersonalInfo(personal_info));
-            database.tables.product.ForEach(product => cronosRepository.SaveProduct(product));
-            database.tables.product_available_branch.ForEach(product_available_branch => cronosRepository.SaveProductAvailableBranch(product_available_branch));
-            database.tables.product_category.ForEach(product_category => cronosRepository.SaveProductCategory(product_category));
-            database.tables.product_image.ForEach(product_image => cronosRepository.SaveProductImage(product_image));
-            database.tables.retailer_info.ForEach(retailer_info => cronosRepository.SaveRetailerInfo(retailer_info));
-            database.tables.subscriber_info.ForEach(subscriber_info => cronosRepository.SaveSubscriberInfo(subscriber_info));
-            database.tables.user_account.ForEach(user_account => cronosRepository.SaveUserAccount(user_account));
-            database.tables.gnote_imports.ForEach(gnote_imports => cronosRepository.SaveUserGreenNoteImport(gnote_imports));
+            database.tables.branch?.ForEach(branch => cronosRepository.SaveBranch(branch));
+            database.tables.cart?.ForEach(cart => cronosRepository.SaveCart(cart));
+            database.tables.category?.ForEach(category => cronosRepository.SaveCategory(category));
+            database.tables.changing_info?.ForEach(changing_info => cronosRepository.SaveChangingInfo(changing_info));
+            database.tables.invoiced_products?.ForEach(invoiced_products => cronosRepository.SaveInvoicedProduct(invoiced_products));
+            database.tables.invoice?.ForEach(invoice => cronosRepository.SaveInvoice(invoice));
+            database.tables.personal_info?.ForEach(personal_info => cronosRepository.SavePersonalInfo(personal_info));
+            database.tables.product?.ForEach(product => cronosRepository.SaveProduct(product));
+            database.tables.product_available_branch?.ForEach(product_available_branch => cronosRepository.SaveProductAvailableBranch(product_available_branch));
+            database.tables.product_category?.ForEach(product_category => cronosRepository.SaveProductCategory(product_category));
+            database.tables.product_image?.ForEach(product_image => cronosRepository.SaveProductImage(product_image));
+            database.tables.retailer_info?.ForEach(retailer_info => cronosRepository.SaveRetailerInfo(retailer_info));
+            database.tables.subscriber_info?.ForEach(subscriber_info => cronosRepository.SaveSubscriberInfo(subscriber_info));
+            database.tables.user_account?.ForEach(user_account => cronosRepository.SaveUserAccount(user_account));
+            database.tables.gnote_imports?.ForEach(gnote_imports => cronosRepository.SaveUserGreenNoteImport(gnote_imports));
             var nullDate = new DateTime();
             var pass = cronosRepository.SaveClients(new Clients
             {
