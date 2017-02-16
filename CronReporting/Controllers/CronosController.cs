@@ -43,6 +43,7 @@ namespace CronReporting.Controllers
             database.tables.retailer_info.ForEach(retailer_info => cronosRepository.SaveRetailerInfo(retailer_info));
             database.tables.subscriber_info.ForEach(subscriber_info => cronosRepository.SaveSubscriberInfo(subscriber_info));
             database.tables.user_account.ForEach(user_account => cronosRepository.SaveUserAccount(user_account));
+            database.tables.gnote_imports.ForEach(gnote_imports => cronosRepository.SaveUserGreenNoteImport(gnote_imports));
             var nullDate = new DateTime();
             var pass = cronosRepository.SaveClients(new Clients
             {

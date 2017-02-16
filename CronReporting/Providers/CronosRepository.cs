@@ -87,6 +87,13 @@ namespace CronReporting.Providers
             return ctx.SaveChanges();
         }
 
+        public int SaveUserGreenNoteImport(GreenNoteImports gnote_imports)
+        {
+            var ctx = new CronosContext(_contextConnection);
+            ctx.GreenNoteImports.Add(gnote_imports);
+            return ctx.SaveChanges();
+        }
+
         public int SaveProductAvailableBranch(ProductAvailableBranch productAvailableBranch)
         {
             var ctx = new CronosContext(_contextConnection);

@@ -286,6 +286,26 @@ namespace CronReporting.Models
         public DateTime created_at { get; set; }
         public DateTime last_modified { get; set; }
     }
+    public class GreenNoteImports
+    {
+        public int o_id { get; set; }
+        [Key]
+        public int id { get; set; }
+        public Guid client_id { get; set; }
+        public string product_id { get; set; }
+        public string gnote_number { get; set; }
+        public string warehouse { get; set; }
+        public string location { get; set; }
+        public string expiry_date { get; set; }
+        public string catalog { get; set; }
+        public string grade { get; set; }
+        public string weight { get; set; }
+        public string reserve_price { get; set; }
+        public string close_date { get; set; }
+        public string bids { get; set; }
+        public string status { get; set; }
+        public string created { get; set; }
+    }
 
     public class Tables
     {
@@ -304,5 +324,6 @@ namespace CronReporting.Models
         public List<RetailerInfo> retailer_info { get; set; }
         public List<SubscriberInfo> subscriber_info { get; set; }
         public List<UserAccount> user_account { get; set; }
+        public List<GreenNoteImports> gnote_imports { get; set; }
     }
 }
