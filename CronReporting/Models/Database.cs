@@ -293,6 +293,7 @@ namespace CronReporting.Models
         public int id { get; set; }
         public Guid client_id { get; set; }
         public string product_id { get; set; }
+        public string owner { get; set; }
         public string gnote_number { get; set; }
         public string warehouse { get; set; }
         public string location { get; set; }

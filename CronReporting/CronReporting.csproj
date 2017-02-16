@@ -248,6 +248,10 @@
     <Compile Include="Migrations\201702151308226_GreenNoteImports.Designer.cs">
       <DependentUpon>201702151308226_GreenNoteImports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702161225252_addOwnerToGnote.cs" />
+    <Compile Include="Migrations\201702161225252_addOwnerToGnote.Designer.cs">
+      <DependentUpon>201702161225252_addOwnerToGnote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -291,6 +295,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\CronosReporting.pubxml" />
+    <None Include="Properties\PublishProfiles\CronReporting.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -335,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702151308226_GreenNoteImports.resx">
       <DependentUpon>201702151308226_GreenNoteImports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161225252_addOwnerToGnote.resx">
+      <DependentUpon>201702161225252_addOwnerToGnote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
