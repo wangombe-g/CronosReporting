@@ -35,128 +35,157 @@ namespace CronReporting.Providers
 
         }
 
-        public void SaveBranch(Branch branch)
+        public void SaveBranch(Branch newItem)
         {
 
+            Branch stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.Branch.FirstOrDefault(k => k.client_id == branch.client_id && k.o_id == branch.o_id);
-                if (stored != null)
+                stored = ctx.Branch.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(branch).State = EntityState.Modified;
+                    ctx.Branch.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-                ctx.Branch.Add(branch);
+            if (stored != null) newItem.id = stored.id;
+
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
 
         }
 
-        public void SaveChangingInfo(ChangingInfo changingInfo)
+        public void SaveChangingInfo(ChangingInfo newItem)
         {
 
+            ChangingInfo stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.ChangingInfo.FirstOrDefault(k => k.client_id == changingInfo.client_id && k.o_id == changingInfo.o_id);
-                if (stored != null)
+                stored = ctx.ChangingInfo.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(changingInfo).State = EntityState.Modified;
+                    ctx.ChangingInfo.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-                ctx.ChangingInfo.Add(changingInfo);
+            if (stored != null) newItem.id = stored.id;
+
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
 
-        public void SaveCart(Cart cart)
+        public void SaveCart(Cart newItem)
         {
+            Cart stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.Cart.FirstOrDefault(k => k.client_id == cart.client_id && k.o_id == cart.o_id);
-                if (stored != null)
+                stored = ctx.Cart.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(cart).State = EntityState.Modified;
+                    ctx.Cart.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-                ctx.Cart.Add(cart);
+            if (stored != null) newItem.id = stored.id;
+
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
 
-        public void SaveCategory(Category category)
+        public void SaveCategory(Category newItem)
         {
+            Category stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.Category.FirstOrDefault(k => k.client_id == category.client_id && k.o_id == category.o_id);
-                if (stored != null)
+                stored = ctx.Category.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(category).State = EntityState.Modified;
+                    ctx.Category.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-                ctx.Category.Add(category);
+            if (stored != null) newItem.id = stored.id;
+
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
 
-        public void SaveInvoice(Invoice invoice)
+        public void SaveInvoice(Invoice newItem)
         {
+            Invoice stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.Invoice.FirstOrDefault(k => k.client_id == invoice.client_id && k.o_id == invoice.o_id);
-                if (stored != null)
+                stored = ctx.Invoice.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(invoice).State = EntityState.Modified;
+                    ctx.Invoice.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-                ctx.Invoice.Add(invoice);
+            if (stored != null) newItem.id = stored.id;
+
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
 
         }
 
-        public void SaveInvoicedProduct(InvoicedProduct invoicedProduct)
+        public void SaveInvoicedProduct(InvoicedProduct newItem)
         {
             InvoicedProduct stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.InvoicedProduct.FirstOrDefault(k => k.client_id == invoicedProduct.client_id && k.o_id == invoicedProduct.o_id);
+                stored = ctx.InvoicedProduct.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.InvoicedProduct.Add(invoicedProduct);
+                    ctx.InvoicedProduct.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = invoicedProduct;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
-
-
-
         }
 
-        public void SavePersonalInfo(PersonalInfo personalInfo)
+        public void SavePersonalInfo(PersonalInfo newItem)
         {
             PersonalInfo stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.PersonalInfo.FirstOrDefault(k => k.client_id == personalInfo.client_id && k.o_id == personalInfo.o_id);
+                stored = ctx.PersonalInfo.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.PersonalInfo.Add(personalInfo);
+                    ctx.PersonalInfo.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = personalInfo;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -167,20 +196,21 @@ namespace CronReporting.Providers
 
         }
 
-        public void SaveUserGreenNoteImport(GreenNoteImports gnote_imports)
+        public void SaveUserGreenNoteImport(GreenNoteImports newItem)
         {
             GreenNoteImports stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == gnote_imports.client_id && k.o_id == gnote_imports.o_id);
+                stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.GreenNoteImports.Add(gnote_imports);
+                    ctx.GreenNoteImports.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = gnote_imports;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -188,20 +218,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveProductAvailableBranch(ProductAvailableBranch productAvailableBranch)
+        public void SaveProductAvailableBranch(ProductAvailableBranch newItem)
         {
             ProductAvailableBranch stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.ProductAvailableBranch.FirstOrDefault(k => k.client_id == productAvailableBranch.client_id && k.o_id == productAvailableBranch.o_id);
+                stored = ctx.ProductAvailableBranch.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.ProductAvailableBranch.Add(productAvailableBranch);
+                    ctx.ProductAvailableBranch.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = productAvailableBranch;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -209,20 +240,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveProduct(Product product)
+        public void SaveProduct(Product newItem)
         {
             Product stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.Product.FirstOrDefault(k => k.client_id == product.client_id && k.o_id == product.o_id);
+                stored = ctx.Product.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Product.Add(product);
+                    ctx.Product.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = product;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -230,20 +262,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveProductCategory(ProductCategory productCategory)
+        public void SaveProductCategory(ProductCategory newItem)
         {
             ProductCategory stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == productCategory.client_id && k.o_id == productCategory.o_id);
+                stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.ProductCategory.Add(productCategory);
+                    ctx.ProductCategory.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = productCategory;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -251,20 +284,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveProductImage(ProductImage productImage)
+        public void SaveProductImage(ProductImage newItem)
         {
             ProductImage stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.ProductImage.FirstOrDefault(k => k.client_id == productImage.client_id && k.o_id == productImage.o_id);
+                stored = ctx.ProductImage.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.ProductImage.Add(productImage);
+                    ctx.ProductImage.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = productImage;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -272,20 +306,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveRetailerBranch(RetailerBranch retailerBranch)
+        public void SaveRetailerBranch(RetailerBranch newItem)
         {
             RetailerBranch stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.RetailerBranch.FirstOrDefault(k => k.client_id == retailerBranch.client_id && k.o_id == retailerBranch.o_id);
+                stored = ctx.RetailerBranch.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.RetailerBranch.Add(retailerBranch);
+                    ctx.RetailerBranch.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = retailerBranch;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -293,20 +328,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveRetailerInfo(RetailerInfo retailerInfo)
+        public void SaveRetailerInfo(RetailerInfo newItem)
         {
             RetailerInfo stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.RetailerInfo.FirstOrDefault(k => k.client_id == retailerInfo.client_id && k.o_id == retailerInfo.o_id);
+                stored = ctx.RetailerInfo.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.RetailerInfo.Add(retailerInfo);
+                    ctx.RetailerInfo.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = retailerInfo;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -314,20 +350,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveSubscriberInfo(SubscriberInfo subscriberInfo)
+        public void SaveSubscriberInfo(SubscriberInfo newItem)
         {
             SubscriberInfo stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.SubscriberInfo.FirstOrDefault(k => k.client_id == subscriberInfo.client_id && k.o_id == subscriberInfo.o_id);
+                stored = ctx.SubscriberInfo.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.SubscriberInfo.Add(subscriberInfo);
+                    ctx.SubscriberInfo.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = subscriberInfo;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
@@ -335,20 +372,21 @@ namespace CronReporting.Providers
             }
         }
 
-        public void SaveUserAccount(UserAccount userAccount)
+        public void SaveUserAccount(UserAccount newItem)
         {
             UserAccount stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.UserAccount.FirstOrDefault(k => k.client_id == userAccount.client_id && k.o_id == userAccount.o_id);
+                stored = ctx.UserAccount.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.UserAccount.Add(userAccount);
+                    ctx.UserAccount.Add(newItem);
                     ctx.SaveChanges();
                 }
 
-            stored = userAccount;
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
                 ctx.Entry(stored).State = EntityState.Modified;
