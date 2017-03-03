@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using CronReporting.Models;
@@ -43,12 +44,8 @@ namespace CronReporting.Providers
                 var stored = ctx.Branch.FirstOrDefault(k => k.client_id == branch.client_id && k.o_id == branch.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(branch);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(branch).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.Branch.Add(branch);
@@ -64,12 +61,8 @@ namespace CronReporting.Providers
                 var stored = ctx.ChangingInfo.FirstOrDefault(k => k.client_id == changingInfo.client_id && k.o_id == changingInfo.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(changingInfo);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(changingInfo).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.ChangingInfo.Add(changingInfo);
@@ -84,12 +77,8 @@ namespace CronReporting.Providers
                 var stored = ctx.Cart.FirstOrDefault(k => k.client_id == cart.client_id && k.o_id == cart.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(cart);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(cart).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.Cart.Add(cart);
@@ -104,12 +93,8 @@ namespace CronReporting.Providers
                 var stored = ctx.Category.FirstOrDefault(k => k.client_id == category.client_id && k.o_id == category.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(category);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(category).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.Category.Add(category);
@@ -124,12 +109,8 @@ namespace CronReporting.Providers
                 var stored = ctx.Invoice.FirstOrDefault(k => k.client_id == invoice.client_id && k.o_id == invoice.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(invoice);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(invoice).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.Invoice.Add(invoice);
@@ -144,12 +125,8 @@ namespace CronReporting.Providers
                 var stored = ctx.InvoicedProduct.FirstOrDefault(k => k.client_id == invoicedProduct.client_id && k.o_id == invoicedProduct.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(invoicedProduct);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(invoicedProduct).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.InvoicedProduct.Add(invoicedProduct);
@@ -165,12 +142,8 @@ namespace CronReporting.Providers
                 var stored = ctx.PersonalInfo.FirstOrDefault(k => k.client_id == personalInfo.client_id && k.o_id == personalInfo.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(personalInfo);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(personalInfo).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.PersonalInfo.Add(personalInfo);
@@ -185,12 +158,8 @@ namespace CronReporting.Providers
                 var stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == gnote_imports.client_id && k.o_id == gnote_imports.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(gnote_imports);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(gnote_imports).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.GreenNoteImports.Add(gnote_imports);
@@ -205,12 +174,8 @@ namespace CronReporting.Providers
                 var stored = ctx.ProductAvailableBranch.FirstOrDefault(k => k.client_id == productAvailableBranch.client_id && k.o_id == productAvailableBranch.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(productAvailableBranch);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(productAvailableBranch).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.ProductAvailableBranch.Add(productAvailableBranch);
@@ -226,12 +191,8 @@ namespace CronReporting.Providers
                 var stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == productCategory.client_id && k.o_id == productCategory.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(productCategory);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(productCategory).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.ProductCategory.Add(productCategory);
@@ -245,12 +206,8 @@ namespace CronReporting.Providers
                 var stored = ctx.Product.FirstOrDefault(k => k.client_id == product.client_id && k.o_id == product.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(product);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(product).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.Product.Add(product);
@@ -265,12 +222,8 @@ namespace CronReporting.Providers
                 var stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == productCategory.client_id && k.o_id == productCategory.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(productCategory);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(productCategory).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.ProductCategory.Add(productCategory);
@@ -285,12 +238,8 @@ namespace CronReporting.Providers
                 var stored = ctx.ProductImage.FirstOrDefault(k => k.client_id == productImage.client_id && k.o_id == productImage.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(productImage);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(productImage).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.ProductImage.Add(productImage);
@@ -306,12 +255,8 @@ namespace CronReporting.Providers
                 var stored = ctx.RetailerBranch.FirstOrDefault(k => k.client_id == retailerBranch.client_id && k.o_id == retailerBranch.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(retailerBranch);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(retailerBranch).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.RetailerBranch.Add(retailerBranch);
@@ -325,12 +270,8 @@ namespace CronReporting.Providers
                 var stored = ctx.RetailerInfo.FirstOrDefault(k => k.client_id == retailerInfo.client_id && k.o_id == retailerInfo.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(retailerInfo);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(retailerInfo).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.RetailerInfo.Add(retailerInfo);
@@ -346,12 +287,8 @@ namespace CronReporting.Providers
                 var stored = ctx.SubscriberInfo.FirstOrDefault(k => k.client_id == subscriberInfo.client_id && k.o_id == subscriberInfo.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(subscriberInfo);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(subscriberInfo).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.SubscriberInfo.Add(subscriberInfo);
@@ -366,12 +303,8 @@ namespace CronReporting.Providers
                 var stored = ctx.UserAccount.FirstOrDefault(k => k.client_id == userAccount.client_id && k.o_id == userAccount.o_id);
                 if (stored != null)
                 {
-                    var entity = ctx.Branch.Find(stored.id);
-                    if (entity != null)
-                    {
-                        ctx.Entry(entity).CurrentValues.SetValues(userAccount);
-                        return ctx.SaveChanges();
-                    }
+                    ctx.Entry(userAccount).State = EntityState.Modified;
+                    return ctx.SaveChanges();
                 }
 
                 ctx.UserAccount.Add(userAccount);
