@@ -41,6 +41,7 @@ namespace CronReporting.Controllers
             database.tables.product_category?.ForEach(product_category => cronosRepository.SaveProductCategory(product_category));
             database.tables.product_image?.ForEach(product_image => cronosRepository.SaveProductImage(product_image));
             database.tables.retailer_info?.ForEach(retailer_info => cronosRepository.SaveRetailerInfo(retailer_info));
+            database.tables.retailer_branches?.ForEach(retailer_branch => cronosRepository.SaveRetailerBranch(retailer_branch));
             database.tables.subscriber_info?.ForEach(subscriber_info => cronosRepository.SaveSubscriberInfo(subscriber_info));
             database.tables.user_account?.ForEach(user_account => cronosRepository.SaveUserAccount(user_account));
             database.tables.gnote_imports?.ForEach(gnote_imports => cronosRepository.SaveUserGreenNoteImport(gnote_imports));

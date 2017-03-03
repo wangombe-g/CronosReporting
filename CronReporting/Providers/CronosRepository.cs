@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using CronReporting.Models;
 
 namespace CronReporting.Providers
@@ -13,7 +11,7 @@ namespace CronReporting.Providers
     {
         private readonly string _contextConnection = ConfigurationManager.AppSettings.Get("ShoppingReporting");
 
-        public int SaveClients(Clients client)
+        public void SaveClients(Clients client)
         {
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -21,14 +19,14 @@ namespace CronReporting.Providers
                 {
                     client.last_sync_date = client.last_sync_date;
                     client.sync_date = DateTime.Now;
-                    return ctx.SaveChanges();
+                    ctx.SaveChanges();
                 }
                 ctx.Clients.Add(client);
-                return ctx.SaveChanges();
+                ctx.SaveChanges();
             }
         }
 
-        public bool GetByRef(Guid guid)
+        private bool GetByRef(Guid guid)
         {
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -36,7 +34,8 @@ namespace CronReporting.Providers
             }
 
         }
-        public int SaveBranch(Branch branch)
+
+        public void SaveBranch(Branch branch)
         {
 
             using (var ctx = new CronosContext(_contextConnection))
@@ -45,15 +44,16 @@ namespace CronReporting.Providers
                 if (stored != null)
                 {
                     ctx.Entry(branch).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.SaveChanges();
                 }
 
                 ctx.Branch.Add(branch);
-                return ctx.SaveChanges();
+                ctx.SaveChanges();
             }
 
         }
-        public int SaveChangingInfo(ChangingInfo changingInfo)
+
+        public void SaveChangingInfo(ChangingInfo changingInfo)
         {
 
             using (var ctx = new CronosContext(_contextConnection))
@@ -62,15 +62,15 @@ namespace CronReporting.Providers
                 if (stored != null)
                 {
                     ctx.Entry(changingInfo).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.SaveChanges();
                 }
 
                 ctx.ChangingInfo.Add(changingInfo);
-                return ctx.SaveChanges();
+                ctx.SaveChanges();
             }
         }
 
-        public int SaveCart(Cart cart)
+        public void SaveCart(Cart cart)
         {
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -78,15 +78,15 @@ namespace CronReporting.Providers
                 if (stored != null)
                 {
                     ctx.Entry(cart).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.SaveChanges();
                 }
 
                 ctx.Cart.Add(cart);
-                return ctx.SaveChanges();
+                ctx.SaveChanges();
             }
         }
 
-        public int SaveCategory(Category category)
+        public void SaveCategory(Category category)
         {
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -94,15 +94,15 @@ namespace CronReporting.Providers
                 if (stored != null)
                 {
                     ctx.Entry(category).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.SaveChanges();
                 }
 
                 ctx.Category.Add(category);
-                return ctx.SaveChanges();
+                ctx.SaveChanges();
             }
         }
 
-        public int SaveInvoice(Invoice invoice)
+        public void SaveInvoice(Invoice invoice)
         {
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -110,205 +110,249 @@ namespace CronReporting.Providers
                 if (stored != null)
                 {
                     ctx.Entry(invoice).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.SaveChanges();
                 }
 
                 ctx.Invoice.Add(invoice);
-                return ctx.SaveChanges();
-            }
-
-        }
-        public int SaveInvoicedProduct(InvoicedProduct invoicedProduct)
-        {
-            using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.InvoicedProduct.FirstOrDefault(k => k.client_id == invoicedProduct.client_id && k.o_id == invoicedProduct.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(invoicedProduct).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
-
-                ctx.InvoicedProduct.Add(invoicedProduct);
-                return ctx.SaveChanges();
+                ctx.SaveChanges();
             }
 
         }
 
-        public int SavePersonalInfo(PersonalInfo personalInfo)
+        public void SaveInvoicedProduct(InvoicedProduct invoicedProduct)
         {
+            InvoicedProduct stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.PersonalInfo.FirstOrDefault(k => k.client_id == personalInfo.client_id && k.o_id == personalInfo.o_id);
-                if (stored != null)
+                stored = ctx.InvoicedProduct.FirstOrDefault(k => k.client_id == invoicedProduct.client_id && k.o_id == invoicedProduct.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(personalInfo).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.InvoicedProduct.Add(invoicedProduct);
+                    ctx.SaveChanges();
                 }
 
-                ctx.PersonalInfo.Add(personalInfo);
-                return ctx.SaveChanges();
-            }
-        }
-
-        public int SaveUserGreenNoteImport(GreenNoteImports gnote_imports)
-        {
+            stored = invoicedProduct;
             using (var ctx = new CronosContext(_contextConnection))
             {
-                var stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == gnote_imports.client_id && k.o_id == gnote_imports.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(gnote_imports).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
-
-                ctx.GreenNoteImports.Add(gnote_imports);
-                return ctx.SaveChanges();
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
-        }
 
-        public int SaveProductAvailableBranch(ProductAvailableBranch productAvailableBranch)
-        {
-            using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.ProductAvailableBranch.FirstOrDefault(k => k.client_id == productAvailableBranch.client_id && k.o_id == productAvailableBranch.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(productAvailableBranch).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
 
-                ctx.ProductAvailableBranch.Add(productAvailableBranch);
-                return ctx.SaveChanges();
-            }
 
         }
 
-        public int SavProductCategory(ProductCategory productCategory)
+        public void SavePersonalInfo(PersonalInfo personalInfo)
         {
+            PersonalInfo stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == productCategory.client_id && k.o_id == productCategory.o_id);
-                if (stored != null)
+                stored = ctx.PersonalInfo.FirstOrDefault(k => k.client_id == personalInfo.client_id && k.o_id == personalInfo.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(productCategory).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.PersonalInfo.Add(personalInfo);
+                    ctx.SaveChanges();
                 }
 
-                ctx.ProductCategory.Add(productCategory);
-                return ctx.SaveChanges();
-            }
-        }
-        public int SaveProduct(Product product)
-        {
+            stored = personalInfo;
             using (var ctx = new CronosContext(_contextConnection))
             {
-                var stored = ctx.Product.FirstOrDefault(k => k.client_id == product.client_id && k.o_id == product.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(product).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
-
-                ctx.Product.Add(product);
-                return ctx.SaveChanges();
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
-        }
 
-        public int SaveProductCategory(ProductCategory productCategory)
-        {
-            using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == productCategory.client_id && k.o_id == productCategory.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(productCategory).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
 
-                ctx.ProductCategory.Add(productCategory);
-                return ctx.SaveChanges();
-            }
-        }
-
-        public int SaveProductImage(ProductImage productImage)
-        {
-            using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.ProductImage.FirstOrDefault(k => k.client_id == productImage.client_id && k.o_id == productImage.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(productImage).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
-
-                ctx.ProductImage.Add(productImage);
-                return ctx.SaveChanges();
-            }
 
         }
 
-        public int SaveRetailerBranch(RetailerBranch retailerBranch)
+        public void SaveUserGreenNoteImport(GreenNoteImports gnote_imports)
         {
+            GreenNoteImports stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.RetailerBranch.FirstOrDefault(k => k.client_id == retailerBranch.client_id && k.o_id == retailerBranch.o_id);
-                if (stored != null)
+                stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == gnote_imports.client_id && k.o_id == gnote_imports.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(retailerBranch).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.GreenNoteImports.Add(gnote_imports);
+                    ctx.SaveChanges();
                 }
 
-                ctx.RetailerBranch.Add(retailerBranch);
-                return ctx.SaveChanges();
-            }
-        }
-        public int SaveRetailerInfo(RetailerInfo retailerInfo)
-        {
+            stored = gnote_imports;
             using (var ctx = new CronosContext(_contextConnection))
             {
-                var stored = ctx.RetailerInfo.FirstOrDefault(k => k.client_id == retailerInfo.client_id && k.o_id == retailerInfo.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(retailerInfo).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
-
-                ctx.RetailerInfo.Add(retailerInfo);
-                return ctx.SaveChanges();
-            }
-
-        }
-
-        public int SaveSubscriberInfo(SubscriberInfo subscriberInfo)
-        {
-            using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.SubscriberInfo.FirstOrDefault(k => k.client_id == subscriberInfo.client_id && k.o_id == subscriberInfo.o_id);
-                if (stored != null)
-                {
-                    ctx.Entry(subscriberInfo).State = EntityState.Modified;
-                    return ctx.SaveChanges();
-                }
-
-                ctx.SubscriberInfo.Add(subscriberInfo);
-                return ctx.SaveChanges();
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
         }
 
-        public int SaveUserAccount(UserAccount userAccount)
+        public void SaveProductAvailableBranch(ProductAvailableBranch productAvailableBranch)
         {
+            ProductAvailableBranch stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                var stored = ctx.UserAccount.FirstOrDefault(k => k.client_id == userAccount.client_id && k.o_id == userAccount.o_id);
-                if (stored != null)
+                stored = ctx.ProductAvailableBranch.FirstOrDefault(k => k.client_id == productAvailableBranch.client_id && k.o_id == productAvailableBranch.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    ctx.Entry(userAccount).State = EntityState.Modified;
-                    return ctx.SaveChanges();
+                    ctx.ProductAvailableBranch.Add(productAvailableBranch);
+                    ctx.SaveChanges();
                 }
 
-                ctx.UserAccount.Add(userAccount);
-                return ctx.SaveChanges();
+            stored = productAvailableBranch;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveProduct(Product product)
+        {
+            Product stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.Product.FirstOrDefault(k => k.client_id == product.client_id && k.o_id == product.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.Product.Add(product);
+                    ctx.SaveChanges();
+                }
+
+            stored = product;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveProductCategory(ProductCategory productCategory)
+        {
+            ProductCategory stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.ProductCategory.FirstOrDefault(k => k.client_id == productCategory.client_id && k.o_id == productCategory.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.ProductCategory.Add(productCategory);
+                    ctx.SaveChanges();
+                }
+
+            stored = productCategory;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveProductImage(ProductImage productImage)
+        {
+            ProductImage stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.ProductImage.FirstOrDefault(k => k.client_id == productImage.client_id && k.o_id == productImage.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.ProductImage.Add(productImage);
+                    ctx.SaveChanges();
+                }
+
+            stored = productImage;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveRetailerBranch(RetailerBranch retailerBranch)
+        {
+            RetailerBranch stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.RetailerBranch.FirstOrDefault(k => k.client_id == retailerBranch.client_id && k.o_id == retailerBranch.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.RetailerBranch.Add(retailerBranch);
+                    ctx.SaveChanges();
+                }
+
+            stored = retailerBranch;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveRetailerInfo(RetailerInfo retailerInfo)
+        {
+            RetailerInfo stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.RetailerInfo.FirstOrDefault(k => k.client_id == retailerInfo.client_id && k.o_id == retailerInfo.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.RetailerInfo.Add(retailerInfo);
+                    ctx.SaveChanges();
+                }
+
+            stored = retailerInfo;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveSubscriberInfo(SubscriberInfo subscriberInfo)
+        {
+            SubscriberInfo stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.SubscriberInfo.FirstOrDefault(k => k.client_id == subscriberInfo.client_id && k.o_id == subscriberInfo.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.SubscriberInfo.Add(subscriberInfo);
+                    ctx.SaveChanges();
+                }
+
+            stored = subscriberInfo;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
+
+        public void SaveUserAccount(UserAccount userAccount)
+        {
+            UserAccount stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.UserAccount.FirstOrDefault(k => k.client_id == userAccount.client_id && k.o_id == userAccount.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.UserAccount.Add(userAccount);
+                    ctx.SaveChanges();
+                }
+
+            stored = userAccount;
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
         }
     }
