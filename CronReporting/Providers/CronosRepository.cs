@@ -198,7 +198,7 @@ namespace CronReporting.Providers
         {
             GreenNoteImports stored;
             using (var ctx = new CronosContext(_contextConnection))
-                stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+                stored = ctx.GreenNoteImports.FirstOrDefault(k => k.client_id == newItem.client_id && k.gnote_number.Equals(newItem.gnote_number));
 
             if (stored == null)
                 using (var ctx = new CronosContext(_contextConnection))
