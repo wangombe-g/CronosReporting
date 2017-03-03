@@ -11,28 +11,26 @@ namespace CronReporting.Providers
     {
         private readonly string _contextConnection = ConfigurationManager.AppSettings.Get("ShoppingReporting");
 
-        public void SaveClients(Clients client)
+        public void SaveClients(Clients newItem)
         {
+            Clients stored;
             using (var ctx = new CronosContext(_contextConnection))
-            {
-                if (GetByRef(client.client_id))
+                stored = ctx.Clients.FirstOrDefault(k => k.client_id == newItem.client_id || k.client == newItem.client);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
                 {
-                    client.last_sync_date = client.last_sync_date;
-                    client.sync_date = DateTime.Now;
+                    ctx.Clients.Add(newItem);
                     ctx.SaveChanges();
                 }
-                ctx.Clients.Add(client);
-                ctx.SaveChanges();
-            }
-        }
 
-        private bool GetByRef(Guid guid)
-        {
+            if (stored != null) newItem.id = stored.id;
+
             using (var ctx = new CronosContext(_contextConnection))
             {
-                return ctx.Clients.Any(k => k.client_id == guid);
+                ctx.Entry(newItem).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
-
         }
 
         public void SaveBranch(Branch newItem)
@@ -188,7 +186,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
 
@@ -213,7 +211,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -235,7 +233,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -257,7 +255,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -279,7 +277,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -301,7 +299,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -323,7 +321,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -345,7 +343,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -367,7 +365,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -389,7 +387,7 @@ namespace CronReporting.Providers
 
             using (var ctx = new CronosContext(_contextConnection))
             {
-                ctx.Entry(stored).State = EntityState.Modified;
+                ctx.Entry(newItem).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
