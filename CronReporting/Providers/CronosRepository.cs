@@ -22,9 +22,10 @@ namespace CronReporting.Providers
                 {
                     ctx.Clients.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -45,9 +46,10 @@ namespace CronReporting.Providers
                 {
                     ctx.Branch.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -69,9 +71,10 @@ namespace CronReporting.Providers
                 {
                     ctx.ChangingInfo.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -91,9 +94,10 @@ namespace CronReporting.Providers
                 {
                     ctx.Cart.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -113,9 +117,10 @@ namespace CronReporting.Providers
                 {
                     ctx.Category.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -135,9 +140,10 @@ namespace CronReporting.Providers
                 {
                     ctx.Invoice.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -158,9 +164,10 @@ namespace CronReporting.Providers
                 {
                     ctx.InvoicedProduct.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -180,9 +187,10 @@ namespace CronReporting.Providers
                 {
                     ctx.PersonalInfo.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -205,9 +213,10 @@ namespace CronReporting.Providers
                 {
                     ctx.GreenNoteImports.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -227,9 +236,10 @@ namespace CronReporting.Providers
                 {
                     ctx.ProductAvailableBranch.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -249,9 +259,10 @@ namespace CronReporting.Providers
                 {
                     ctx.Product.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -271,9 +282,10 @@ namespace CronReporting.Providers
                 {
                     ctx.ProductCategory.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -293,9 +305,10 @@ namespace CronReporting.Providers
                 {
                     ctx.ProductImage.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -315,9 +328,10 @@ namespace CronReporting.Providers
                 {
                     ctx.RetailerBranch.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -337,9 +351,10 @@ namespace CronReporting.Providers
                 {
                     ctx.RetailerInfo.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -359,9 +374,10 @@ namespace CronReporting.Providers
                 {
                     ctx.SubscriberInfo.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
@@ -381,9 +397,10 @@ namespace CronReporting.Providers
                 {
                     ctx.UserAccount.Add(newItem);
                     ctx.SaveChanges();
+                    return;
                 }
 
-            if (stored != null) newItem.id = stored.id;
+            newItem.id = stored.id;
 
             using (var ctx = new CronosContext(_contextConnection))
             {
