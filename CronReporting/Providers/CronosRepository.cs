@@ -408,5 +408,28 @@ namespace CronReporting.Providers
                 ctx.SaveChanges();
             }
         }
+
+        public void SaveSmsReceived(SmsReceived newItem)
+        {
+            SmsReceived stored;
+            using (var ctx = new CronosContext(_contextConnection))
+                stored = ctx.SmsReceived.FirstOrDefault(k => k.client_id == newItem.client_id && k.o_id == newItem.o_id);
+
+            if (stored == null)
+                using (var ctx = new CronosContext(_contextConnection))
+                {
+                    ctx.SmsReceived.Add(newItem);
+                    ctx.SaveChanges();
+                    return;
+                }
+
+            newItem.id = stored.id;
+
+            using (var ctx = new CronosContext(_contextConnection))
+            {
+                ctx.Entry(newItem).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
     }
 }

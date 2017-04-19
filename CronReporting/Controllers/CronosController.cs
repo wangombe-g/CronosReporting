@@ -45,6 +45,7 @@ namespace CronReporting.Controllers
             database.tables.subscriber_info?.ForEach(subscriber_info => cronosRepository.SaveSubscriberInfo(subscriber_info));
             database.tables.user_account?.ForEach(user_account => cronosRepository.SaveUserAccount(user_account));
             database.tables.gnote_imports?.ForEach(gnote_imports => cronosRepository.SaveUserGreenNoteImport(gnote_imports));
+            database.tables.sms_received?.ForEach(sms_received => cronosRepository.SaveSmsReceived(sms_received));
             var nullDate = new DateTime();
             cronosRepository.SaveClients(new Clients
             {

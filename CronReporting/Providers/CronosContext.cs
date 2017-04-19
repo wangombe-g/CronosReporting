@@ -36,6 +36,7 @@ namespace CronReporting.Providers
         public DbSet<SubscriberInfo> SubscriberInfo { get; set; }
         public DbSet<ChangingInfo> ChangingInfo { get; set; }
         public DbSet<UserAccount> UserAccount { get; set; }
+        public DbSet<SmsReceived> SmsReceived { get; set; }
         public DbSet<GreenNoteImports> GreenNoteImports { get; set; }
     }
 }

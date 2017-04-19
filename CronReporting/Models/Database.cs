@@ -269,10 +269,8 @@ namespace CronReporting.Models
     public class SubscriberInfo
     {
         public int o_id { get; set; }
-
         [Key]
         public int id { get; set; }
-
         public Guid client_id { get; set; }
         public int user_id { get; set; }
         public string mpin { get; set; }
@@ -286,6 +284,21 @@ namespace CronReporting.Models
         public DateTime created_at { get; set; }
         public DateTime last_modified { get; set; }
     }
+
+    public class SmsReceived
+    {
+        [Key]
+        public int id { get; set; }
+        public string msisdn { get; set; }
+        public string message { get; set; }
+        public string message_type { get; set; }
+        public string group { get; set; }
+        public string status { get; set; }
+        public DateTime created { get; set; }
+        public Guid client_id { get; set; }
+        public int o_id { get; set; }
+    }
+
     public class GreenNoteImports
     {
         public int o_id { get; set; }
@@ -326,5 +339,6 @@ namespace CronReporting.Models
         public List<SubscriberInfo> subscriber_info { get; set; }
         public List<UserAccount> user_account { get; set; }
         public List<GreenNoteImports> gnote_imports { get; set; }
+        public List<SmsReceived> sms_received { get; set; }
     }
 }

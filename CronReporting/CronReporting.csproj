@@ -252,6 +252,10 @@
     <Compile Include="Migrations\201702161225252_addOwnerToGnote.Designer.cs">
       <DependentUpon>201702161225252_addOwnerToGnote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704190848147_sms_received_migration.cs" />
+    <Compile Include="Migrations\201704190848147_sms_received_migration.Designer.cs">
+      <DependentUpon>201704190848147_sms_received_migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -344,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161225252_addOwnerToGnote.resx">
       <DependentUpon>201702161225252_addOwnerToGnote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704190848147_sms_received_migration.resx">
+      <DependentUpon>201704190848147_sms_received_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
